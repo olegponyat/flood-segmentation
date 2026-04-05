@@ -4,7 +4,7 @@
 
 This project leverages the **WorldFloods Dataset** to train a deep learning model for detecting and segmenting flooded areas in satellite imagery. The model classifies each pixel into three categories: **Land** (0), **Water** (1), and **Cloud** (2).
 
-The project implements a U-Net architecture optimized for satellite imagery with custom loss functions—both Focal Loss and Dice Loss with class weighting—to handle class imbalance between land, water, and cloud pixels. Built with PyTorch Lightning, the framework provides streamlined training with integrated callbacks and checkpoint management. The model delivers comprehensive performance metrics using IoU, Recall, and Dice Loss evaluation, while the inference pipeline enables water polygon extraction and geographic visualization with GeoPandas for seamless GIS integration.
+The project implements a U-Net CNN architecture optimized for satellite imagery with custom loss functions, both Focal Loss and Dice Loss ,with class weighting, to handle class imbalance between land, water, and cloud pixels. The model's performance is evaluated on metrics including IoU, Precision, and Recall, while the inference pipeline enables water polygon extraction and geographic visualization with GeoPandas for improved GIS integration.
 
 > [!IMPORTANT]
 > This project requires **30+ GB of storage** for the full WorldFloods dataset and works best with an NVIDIA GPU. **DO NOT ATTEMPT TO RUN WITHOUT EITHER OF THESE REQUIREMENTS.**
