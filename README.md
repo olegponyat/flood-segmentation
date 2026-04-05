@@ -34,45 +34,16 @@ pip install gdown ml4floods torch pytorch-lightning geopandas matplotlib pandas 
 ```
 
 
-## Workflow
+## Custom Loss Functions
 
-### 1. **Data Setup**
-- Downloads the WorldFloods Dataset (~12.7 GB)
-- Validates dataset integrity
-- Prepares train/validation splits
+The project implements a hybrid loss function combining two complementary approaches:
 
-### 2. **Configuration**
-- Loads default configuration from ml4floods template
-- Sets experiment name and hyperparameters
-- Configures batch size, learning rate, and class weights
-
-### 3. **Model Architecture**
-- U-Net model for semantic segmentation
-- Input: 11 Sentinel-2 bands (multispectral imagery)
-- Output: 3-channel probability map (Land, Water, Cloud)
-
-### 4. **Custom Loss Functions**
-- **Focal Loss**: Addresses class imbalance
-- **Dice Loss**: Direct optimization of IoU metric
-- **Combined Loss**: Weighted combination of both
+- **Focal Loss**: Addresses class imbalance by down-weighting easy examples and focusing on hard negatives
+- **Dice Loss**: Direct optimization of the Intersection over Union (IoU) metric, crucial for segmentation tasks
+- A weighted combination of both losses is then used for overall class balance
 
 > [!NOTE]
-> The extreme class weight for water (10M) compensates for the severe class imbalance in satellite imagery where water pixels are much rarer than land pixels.
-
-### 5. **Training**
-- PyTorch Lightning Trainer with GPU acceleration
-- Early stopping and checkpoint management
-- Validation every epoch with Dice Loss monitoring
-
-### 6. **Evaluation**
-- Computes IoU, Recall, and Precision metrics
-- Analyzes performance per flood event (CEMS code)
-- Generates confusion matrices
-
-### 7. **Inference & Visualization**
-- Pixel-level water probability predictions
-- Water polygon extraction using postprocessing
-- Geographic visualization with base imagery
+> The extreme class weight for water (10M) compensates for the severe class imbalance in satellite imagery where water pixels are much rarer than land pixels. This weighting scheme ensures the model learns to detect water effectively despite its scarcity in training data.
 
 ## Usage
 
